@@ -54,4 +54,23 @@
             phone=#{phone}
     </select>
 
+    <select id="getUserById" parameterType="java.lang.Long" resultType="com.chen.bili.domain.User">
+        select
+            *
+        from
+            t_user
+        where
+            id = #{userId}
+
+
+    </select>
+
+    <select id="getUserInfoByUserId" parameterType="java.lang.long" resultType="com.chen.bili.domain.UserInfo">
+        select
+            *
+        from
+            t_user_info
+        where
+            userId = #{userId}
+    </select>
 </mapper>

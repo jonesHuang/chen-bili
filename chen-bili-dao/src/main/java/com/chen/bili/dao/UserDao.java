@@ -19,4 +19,8 @@ public interface UserDao {
     Integer addUserInfo(UserInfo userInfo);
 
     User getUserByPhone(String phone);
+
+    User getUserById(Long userId);
+
+    UserInfo getUserInfoByUserId(Long userId);
 }

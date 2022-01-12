@@ -64,7 +64,7 @@ public class UserService {
         return userDao.getUserByPhone(phone);
     }
 
-    public String login(User user){
+    public String login(User user) throws Exception{
         String phone = user.getPhone();
         if (StringUtils.isNullOrEmpty(phone)){
             throw new ConditionException("手机号不能为空");
@@ -84,10 +84,16 @@ public class UserService {
         String md5password = MD5Util.sign(rawPassword,salt,"UTF-8");
         if (!md5password.equals(dbUser.getPassword())){
             throw new ConditionException("密码错误!");
-        }
-        TokenUtil tokenUtil = new TokenUtil();
+        }TokenUtil tokenUtil = new TokenUtil();
 
-        return tokenUtil.generateToken(dbUser.getId());
+        return TokenUtil.generateToken(dbUser.getId());
+    }
+
+    public User getUserInfo(Long userId){
+        User user=userDao.getUserById(userId);
+        UserInfo userInfo = userDao.getUserInfoByUserId(userId);
+        user.setUserInfo(userInfo);
+        return user;
     }
 
 }
